@@ -1,0 +1,111 @@
+┌──(kali㉿kali)-[~]
+└─$ cd Documents
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Documents]
+└─$ ls
+example2.log  example.log  webserver.log
+
+(affichage des 15 premieres lignes seulement) :
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Documents]
+└─$ cat -n example.log example2.log
+     1
+     2   01 
+     3  03/22 08:51:01 INFO   :.main: *************** RSVP Agent started ***************
+     4   02 
+     5  03/22 08:51:01 INFO   :...locate_configFile: Specified configuration file: /u/user10/rsvpd1.conf
+     6  03/22 08:51:01 INFO   :.main: Using log level 511
+     7  03/22 08:51:01 INFO   :..settcpimage: Get TCP images rc - EDC8112I Operation not supported on socket.
+     8   03 
+     9  03/22 08:51:01 INFO   :..settcpimage: Associate with TCP/IP image name = TCPCS
+    10  03/22 08:51:02 INFO   :..reg_process: registering process with the system
+    11  03/22 08:51:02 INFO   :..reg_process: attempt OS/390 registration
+    12  03/22 08:51:02 INFO   :..reg_process: return from registration rc=0
+    13   04 
+    14  03/22 08:51:06 TRACE  :...read_physical_netif: Home list entries returned = 7
+    15  03/22 08:51:06 INFO   :...read_physical_netif: index #0, interface VLINK1 has address 129.1.1.1, ifidx 0
+
+
+
+
+
+
+┌──(kali㉿kali)-[~/Documents]
+└─$ cat -n example.log example2.log > access_log.log
+                                                                                                                   
+┌──(kali㉿kali)-[~/Documents]
+└─$ ls        
+access_log.log  example2.log  example.log  webserver.log
+
+┌──(kali㉿kali)-[~/Documents]
+└─$ ls -l access_log.log
+-rw-r--r-- 1 kali kali 25521 May 17 01:33 access_log.log
+                                                                                                                   
+┌──(kali㉿kali)-[~/Documents]
+└─$ head access_log.log
+     1
+     2   01 
+     3  03/22 08:51:01 INFO   :.main: *************** RSVP Agent started ***************
+     4   02 
+     5  03/22 08:51:01 INFO   :...locate_configFile: Specified configuration file: /u/user10/rsvpd1.conf
+     6  03/22 08:51:01 INFO   :.main: Using log level 511
+     7  03/22 08:51:01 INFO   :..settcpimage: Get TCP images rc - EDC8112I Operation not supported on socket.
+     8   03 
+     9  03/22 08:51:01 INFO   :..settcpimage: Associate with TCP/IP image name = TCPCS
+    10  03/22 08:51:02 INFO   :..reg_process: registering process with the system
+                                                                                                                   
+┌──(kali㉿kali)-[~/Documents]
+└─$ tail access_log.log                                                
+   361  03/22 08:54:53 INFO   :......term_policyAPI: APITerminate:  Entering
+   362   
+   363  03/22 08:54:53 INFO   :......term_policyAPI: APITerminate:  Exiting
+   364   
+   365  03/22 08:54:53 INFO   :......term_policyAPI: Policy API terminated
+   366  03/22 08:54:53 INFO   :......dreg_process: deregistering process with the system
+   367  03/22 08:54:53 INFO   :......dreg_process: attempt to dereg (ifaeddrg_byaddr)
+   368  03/22 08:54:53 INFO   :......dreg_process: rc from ifaeddrg_byaddr  rc =0
+   369  03/22 08:54:53 INFO   :.....terminator: process terminated with exit code 0
+   370
+
+
+
+
+
+
+
+┌──(kali㉿kali)-[~/Documents]
+└─$ logger "Gomycode Babyyy"
+
+┌──(kali㉿kali)-[/]
+└─$ sudo journalctl | grep -i "Gomycode Babyyy"
+May 17 01:36:44 kali kali[12615]: Gomycode Babyyy
+
+(affichage des 10 premieres lignes seulement) :
+
+──(kali㉿kali)-[/]
+└─$ sudo journalctl | grep [plc]               
+Aug 21 06:03:52 kali kernel: Linux version 6.1.0-kali9-amd64 (devel@kali.org) (gcc-12 (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40) #1 SMP PREEMPT_DYNAMIC Debian 6.1.27-1kali1 (2023-05-12)
+Aug 21 06:03:52 kali kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-6.1.0-kali9-amd64 root=UUID=b391398d-058a-4bfa-948f-f87a4452eed3 ro quiet splash
+Aug 21 06:03:52 kali kernel: Disabled fast string operations
+Aug 21 06:03:52 kali kernel: x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+Aug 21 06:03:52 kali kernel: x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+Aug 21 06:03:52 kali kernel: x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+Aug 21 06:03:52 kali kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+Aug 21 06:03:52 kali kernel: x86/fpu: Enabled xstate features 0x7, context size is 832 bytes, using 'standard' format.
+
+
+
+
+
+
+┌──(kali㉿kali)-[~/Documents]
+└─$ sudo journalctl | grep -E "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" webserver.log
+192.168.198.92 - - [22/Dec/2002:23:08:37 -0400] "GET 
+192.168.198.92 - - [22/Dec/2002:23:08:38 -0400] "GET 
+192.168.72.177 - - [22/Dec/2002:23:32:14 -0400] "GET 
+192.168.72.177 - - [22/Dec/2002:23:32:14 -0400] "GET 
+192.168.72.177 - - [22/Dec/2002:23:32:15 -0400] "GET 
+192.168.72.177 - - [22/Dec/2002:23:32:16 -0400] "GET 
+192.168.72.177 - - [22/Dec/2002:23:32:19 -0400] "GET 
+
+
